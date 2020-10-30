@@ -18,15 +18,20 @@ const Home: React.FC = () => {
       </header>
 
       <main>
-        {[1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(number => (
-          <ChatContainer>
-            <ChatAvatar src="https://github.com/joaopaulo-ld.png" />
-            <div className="chat-informations-wrapper">
-              <ChatName>João Paulo</ChatName>
-              <ChatLastMessage>Tô chegando aí {';)'}</ChatLastMessage>
-            </div>
-          </ChatContainer>
-        ))}
+        <div className="chats-wrapper">
+          {[1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(number => (
+            <ChatContainer>
+              <ChatAvatar src="https://github.com/joaopaulo-ld.png" />
+              <div className="chat-informations-wrapper">
+                <ChatName>João Paulo</ChatName>
+                <ChatLastMessage>Tô chegando aí {';)'}</ChatLastMessage>
+              </div>
+            </ChatContainer>
+          ))}
+        </div>
+        <div className="selected-chat-wrapper">
+          <h1>Something</h1>
+        </div>
       </main>
     </Container>
   )

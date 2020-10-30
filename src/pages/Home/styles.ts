@@ -1,14 +1,19 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  height: 100vh;
+
   > header {
     background: rgb(30,26,36);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    position: fixed;
-    width: 100vw;
+    position: sticky;
+
+    @media (max-width: 800px) {
+      width: 100vw;
+    }
 
     > h1 {
       font-size: 25px;
@@ -16,7 +21,32 @@ export const Container = styled.div`
   }
 
   > main {
-    padding-top: 60px;
+    .selected-chat-wrapper {
+      display: none;
+    }
+
+    .chats-wrapper {
+      background: red;
+      overflow-y: scroll;
+      height: calc(100vh - 60px);
+    }
+  }
+
+  @media (min-width: 800px) {
+    > main {
+      display: flex;
+      justify-content: space-between;
+
+      .chats-wrapper {
+        width: 25vw;
+      }
+
+      .selected-chat-wrapper {
+        display: flex;
+        background: rgba(0,0,0,0.1);
+        width: 75vw;
+      }
+    }
   }
 `
 
