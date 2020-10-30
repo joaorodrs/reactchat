@@ -10,4 +10,9 @@ export default createGlobalStyle`
   button, input, text-area {
     outline: 0;
   }
+
+  body {
+    background: rgb(40,38,53);
+    color: white;
+  }
 `
