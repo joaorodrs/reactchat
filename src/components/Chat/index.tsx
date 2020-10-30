@@ -13,7 +13,7 @@ const Chat: React.FC<Props> = ({ name, userId, photoUrl }) => {
     <Container>
       <h1>{name}</h1>
       <h1>{userId}</h1>
-      <img src={photoUrl} />
+      <img src={photoUrl} alt={name} />
     </Container>
   )
 }

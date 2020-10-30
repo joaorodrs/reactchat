@@ -19,6 +19,12 @@ export const Container = styled.div`
     > h1 {
       font-size: 25px;
     }
+
+    @media (max-width: 800px) {
+      > h1 {
+        margin-left: 15px;
+      }
+    }
   }
 
   > main {
@@ -66,6 +72,10 @@ export const AvatarImage = styled.img`
   border-radius: 50%;
   padding: 3px;
   border: 1px solid white;
+
+  @media (max-width: 800px) {
+    margin-left: 10px;
+  }
 `
 
 export const ChatContainer = styled.div`
@@ -93,7 +103,9 @@ export const ChatAvatar = styled.img`
 
 export const ChatName = styled.h3``
 
-export const ChatLastMessage = styled.p``
+export const ChatLastMessage = styled.p`
+  max-lines: 1;
+`
 
 export const BackIcon = styled(FiArrowLeft)`
   width: 30px;

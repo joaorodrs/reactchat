@@ -64,20 +64,44 @@ const Home: React.FC = () => {
 
   const [showSelectedChat, setShowSelectedChat] = useState(false)
 
+  const [selectedChatName, setSelectedChatName] = useState('cool')
+  const [selectedChatUserId, setSelectedChatUserId] = useState('')
+  const [selectedChatPhotoUrl, setSelectedChatPhotoUrl] = useState('')
+  const [selectedChatLastMessage, setSelectedChatLastMessage] = useState('')
+
+  const handleOpenChat = ({ name, userId, photoUrl, lastMessage }: Conversations) => {
+    setSelectedChatName(name)
+    setSelectedChatUserId(userId)
+    setSelectedChatPhotoUrl(photoUrl)
+    setSelectedChatLastMessage(lastMessage)
+
+    setShowSelectedChat(true)
+  }
+
   return (
     <Container>
-      <header>
+      <header style={{ justifyContent: showSelectedChat ? windowWidth < 800 ? 'flex-start' : 'space-between' : 'space-between' }}>
         {windowWidth < 800 ? (
           <>
             {!showSelectedChat ? (
-              <h1><i>ReactChat</i></h1>
-            ) : <BackIcon onClick={() => setShowSelectedChat(false)} />}
+              <>
+                <h1><i>ReactChat</i></h1>
+                <AvatarImage src="https://github.com/joaopaulo-ld.png" />
+              </>
+            ) : (
+              <>
+                <BackIcon onClick={() => setShowSelectedChat(false)} />
+                <AvatarImage src={selectedChatPhotoUrl} />
+                <h1>{selectedChatName}</h1>
+              </>
+            )}
           </>
         ) : (
-          <h1><i>ReactChat</i></h1>
+          <>
+            <h1><i>ReactChat</i></h1>
+            <AvatarImage src="https://github.com/joaopaulo-ld.png" />
+          </>
         )}
-        
-        <AvatarImage src="https://github.com/joaopaulo-ld.png" />
       </header>
 
       <main>
@@ -85,8 +109,8 @@ const Home: React.FC = () => {
           <>
             {!showSelectedChat && (
               <div className="chats-wrapper">
-                {conversations.map(conversation => (
-                  <ChatContainer onClick={() => setShowSelectedChat(true)}>
+                {conversations.map((conversation) => (
+                  <ChatContainer onClick={() => handleOpenChat(conversation)}>
                     <ChatAvatar src={conversation.photoUrl} />
                     <div className="chat-informations-wrapper">
                       <ChatName>{conversation.name}</ChatName>
@@ -101,7 +125,7 @@ const Home: React.FC = () => {
           <>
             <div className="chats-wrapper">
               {conversations.map(conversation => (
-                <ChatContainer onClick={() => setShowSelectedChat(true)}>
+                <ChatContainer onClick={() => handleOpenChat(conversation)}>
                   <ChatAvatar src={conversation.photoUrl} />
                   <div className="chat-informations-wrapper">
                     <ChatName>{conversation.name}</ChatName>
@@ -112,12 +136,12 @@ const Home: React.FC = () => {
             </div>
           </>
         )}
-        
-        {showSelectedChat && (
-          <div className="selected-chat-wrapper">
-            <Chat name="João Paulo" userId="joaopaulo-ld" photoUrl="https://github.com/joaopaulo-ld.png" />
-          </div>
-        )}
+
+        <div className="selected-chat-wrapper">
+          {showSelectedChat && (
+            <Chat name={selectedChatName} userId={selectedChatUserId} photoUrl={selectedChatPhotoUrl} />
+          )}
+        </div>
       </main>
     </Container>
   )
