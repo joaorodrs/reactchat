@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { FiArrowLeft } from 'react-icons/fi'
 
 export const Container = styled.div`
   height: 100vh;
@@ -21,10 +22,6 @@ export const Container = styled.div`
   }
 
   > main {
-    .selected-chat-wrapper {
-      display: none;
-    }
-
     .chats-wrapper {
       overflow-y: scroll;
       height: calc(100vh - 60px);
@@ -97,3 +94,8 @@ export const ChatAvatar = styled.img`
 export const ChatName = styled.h3``
 
 export const ChatLastMessage = styled.p``
+
+export const BackIcon = styled(FiArrowLeft)`
+  width: 30px;
+  height: 30px;
+`
