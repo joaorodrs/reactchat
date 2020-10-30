@@ -26,25 +26,38 @@ export const Container = styled.div`
     }
 
     .chats-wrapper {
-      background: red;
       overflow-y: scroll;
       height: calc(100vh - 60px);
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        border-radius: 15px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+
+        :hover {
+          background: rgba(255,255,255,0.15);
+        }
+      }
     }
   }
 
   @media (min-width: 800px) {
     > main {
       display: flex;
-      justify-content: space-between;
 
       .chats-wrapper {
-        width: 25vw;
+        width: 350px;
       }
 
       .selected-chat-wrapper {
         display: flex;
         background: rgba(0,0,0,0.1);
-        width: 75vw;
+        width: 100%;
       }
     }
   }
@@ -62,8 +75,16 @@ export const ChatContainer = styled.div`
   padding: 10px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  border-radius: 10px;
+
   > div.chat-informations-wrapper {
     margin-left: 15px;
+  }
+
+  :hover {
+    background: rgba(255,255,255,0.04);
   }
 `
 

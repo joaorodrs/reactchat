@@ -13,13 +13,13 @@ const Home: React.FC = () => {
   return (
     <Container>
       <header>
-        <h1>Reactchat</h1>
+        <h1><i>ReactChat</i></h1>
         <AvatarImage src="https://github.com/joaopaulo-ld.png" />
       </header>
 
       <main>
         <div className="chats-wrapper">
-          {[1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(number => (
+          {[1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(() => (
             <ChatContainer>
               <ChatAvatar src="https://github.com/joaopaulo-ld.png" />
               <div className="chat-informations-wrapper">
