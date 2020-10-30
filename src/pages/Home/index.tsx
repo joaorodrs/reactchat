@@ -17,15 +17,17 @@ const Home: React.FC = () => {
         <AvatarImage src="https://github.com/joaopaulo-ld.png" />
       </header>
 
-      {[1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(number => (
-        <ChatContainer>
-          <ChatAvatar src="https://github.com/joaopaulo-ld.png" />
-          <div className="chat-informations-wrapper">
-            <ChatName>João Paulo</ChatName>
-            <ChatLastMessage>Tô chegando aí {';)'}</ChatLastMessage>
-          </div>
-        </ChatContainer>
-      ))}
+      <main>
+        {[1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(number => (
+          <ChatContainer>
+            <ChatAvatar src="https://github.com/joaopaulo-ld.png" />
+            <div className="chat-informations-wrapper">
+              <ChatName>João Paulo</ChatName>
+              <ChatLastMessage>Tô chegando aí {';)'}</ChatLastMessage>
+            </div>
+          </ChatContainer>
+        ))}
+      </main>
     </Container>
   )
 }

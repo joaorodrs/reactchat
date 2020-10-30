@@ -14,6 +14,10 @@ export const Container = styled.div`
       font-size: 25px;
     }
   }
+
+  > main {
+    padding-top: 60px;
+  }
 `
 
 export const AvatarImage = styled.img`
@@ -28,7 +32,6 @@ export const ChatContainer = styled.div`
   padding: 10px;
   display: flex;
   align-items: center;
-
   > div.chat-informations-wrapper {
     margin-left: 15px;
   }

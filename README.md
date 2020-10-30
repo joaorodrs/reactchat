@@ -1,8 +1,8 @@
-<i><h1 align='center'>Reactchat</h1></i>
+<i><h1 align='center'>ReactChat</h1></i>
 <p align='center'>A ReactJS real-time chatting application with Firebase and Styled Components</p>
 
 <p align='center'>
-  <img src='' alt="Preview gif" />
+  <img src='./src/assets/reactchat.gif' alt="ReactChat" />
 </p>
 
 ## 📌 Index
