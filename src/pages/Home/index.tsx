@@ -20,7 +20,6 @@ interface Conversations {
 }
 
 const windowWidth = window.innerWidth
-console.log(windowWidth)
 
 const Home: React.FC = () => {
   const conversations: Conversations[] = [
@@ -67,13 +66,13 @@ const Home: React.FC = () => {
   const [selectedChatName, setSelectedChatName] = useState('cool')
   const [selectedChatUserId, setSelectedChatUserId] = useState('')
   const [selectedChatPhotoUrl, setSelectedChatPhotoUrl] = useState('')
-  const [selectedChatLastMessage, setSelectedChatLastMessage] = useState('')
+  // const [selectedChatLastMessage, setSelectedChatLastMessage] = useState('')
 
   const handleOpenChat = ({ name, userId, photoUrl, lastMessage }: Conversations) => {
     setSelectedChatName(name)
     setSelectedChatUserId(userId)
     setSelectedChatPhotoUrl(photoUrl)
-    setSelectedChatLastMessage(lastMessage)
+    // setSelectedChatLastMessage(lastMessage)
 
     setShowSelectedChat(true)
   }
@@ -85,7 +84,7 @@ const Home: React.FC = () => {
           <>
             {!showSelectedChat ? (
               <>
-                <h1><i>ReactChat</i></h1>
+                <h1>ReactChat</h1>
                 <AvatarImage src="https://github.com/joaopaulo-ld.png" />
               </>
             ) : (

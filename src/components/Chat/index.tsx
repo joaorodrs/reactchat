@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { Container } from './styles'
+import {
+  Container,
+  ChatContainer,
+  InputContainer,
+  SendMessageButton,
+  SendMessageIcon
+} from './styles'
 
 interface Props {
   name: string,
@@ -11,9 +17,15 @@ interface Props {
 const Chat: React.FC<Props> = ({ name, userId, photoUrl }) => {
   return (
     <Container>
-      <h1>{name}</h1>
-      <h1>{userId}</h1>
-      <img src={photoUrl} alt={name} />
+      <ChatContainer>
+
+      </ChatContainer>
+      <InputContainer>
+        <input placeholder="Digite uma mensagem" />
+        <SendMessageButton>
+          <SendMessageIcon />
+        </SendMessageButton>
+      </InputContainer>
     </Container>
   )
 }

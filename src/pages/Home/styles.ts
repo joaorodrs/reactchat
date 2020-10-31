@@ -22,7 +22,7 @@ export const Container = styled.div`
 
     @media (max-width: 800px) {
       > h1 {
-        margin-left: 15px;
+        margin-left: 8px;
       }
     }
   }
