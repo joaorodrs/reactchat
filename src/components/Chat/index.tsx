@@ -15,13 +15,17 @@ interface Props {
 }
 
 const Chat: React.FC<Props> = ({ name, userId, photoUrl }) => {
+  const handleSendMessage = () => console.log('Pressed!')
+
   return (
     <Container>
       <ChatContainer>
 
       </ChatContainer>
       <InputContainer>
-        <input placeholder="Digite uma mensagem" />
+        <input
+          placeholder="Digite uma mensagem"
+        />
         <SendMessageButton>
           <SendMessageIcon />
         </SendMessageButton>

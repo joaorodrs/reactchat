@@ -17,7 +17,7 @@ export const Container = styled.div`
     }
 
     > h1 {
-      font-size: 25px;
+      font-size: 20px;
     }
 
     @media (max-width: 800px) {

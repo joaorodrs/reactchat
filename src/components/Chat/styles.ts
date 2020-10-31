@@ -33,6 +33,10 @@ export const InputContainer = styled.div`
     color: white;
     transition: 0.2s;
 
+    @media (min-width: 800px) {
+      font-size: 17px;
+    }
+
     :focus {
       background: rgba(255,255,255,0.05);
     }
@@ -49,10 +53,6 @@ export const SendMessageButton = styled.button`
   cursor: pointer;
   transition: 0.2s;
   border-radius: 0 8px 8px 0;
-
-  :hover {
-    background: rgba(255,255,255,0.1);
-  }
 `
 
 export const SendMessageIcon = styled(FiSend)`
