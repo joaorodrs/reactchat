@@ -10,7 +10,7 @@ export const Container = styled.div`
 `
 
 export const ButtonsContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,19 +26,19 @@ const buttonCss = css`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.3s;
+
+  :hover {
+    border: 1px solid white;
+    color: white;
+    background: transparent;
+  }
 `
 
 export const GoogleButton = styled.div`
   ${buttonCss}
-  background: white;
-  color: red;
-
-  :hover {
-    border: 2px solid white;
-    color: white;
-    background: transparent;
-  }
+  background: #ea4335;
+  color: white;
 `
 
 const iconCss = css`
@@ -50,15 +50,11 @@ const iconCss = css`
 export const GoogleIcon = styled(IoLogoGoogle)`
   ${iconCss}
   color: white;
-
-  > svg {
-    color: red;
-  }
 `
 
 export const FacebookButton = styled.div`
   ${buttonCss}
-  margin-top: 20px;
+  margin-top: 15px;
   background: #1778f2;
 `
 
