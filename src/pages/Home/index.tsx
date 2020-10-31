@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Chat from '../../components/Chat'
+
+import firebase from 'firebase/app'
 
 import {
   Container,
@@ -19,9 +21,14 @@ interface Conversations {
   lastMessage: string
 }
 
+interface Props {
+  auth: firebase.auth.Auth,
+  firestore: firebase.firestore.Firestore
+}
+
 const windowWidth = window.innerWidth
 
-const Home: React.FC = () => {
+const Home: React.FC<Props> = ({ firestore, auth }) => {
   const conversations: Conversations[] = [
     {
       name: 'João Paulo',
@@ -63,19 +70,23 @@ const Home: React.FC = () => {
 
   const [showSelectedChat, setShowSelectedChat] = useState(false)
 
+  const [userPhotoUrl, setUserPhotoUrl] = useState('')
+
   const [selectedChatName, setSelectedChatName] = useState('cool')
   const [selectedChatUserId, setSelectedChatUserId] = useState('')
   const [selectedChatPhotoUrl, setSelectedChatPhotoUrl] = useState('')
-  // const [selectedChatLastMessage, setSelectedChatLastMessage] = useState('')
 
   const handleOpenChat = ({ name, userId, photoUrl, lastMessage }: Conversations) => {
     setSelectedChatName(name)
     setSelectedChatUserId(userId)
     setSelectedChatPhotoUrl(photoUrl)
-    // setSelectedChatLastMessage(lastMessage)
 
     setShowSelectedChat(true)
   }
+
+  useEffect(() => {
+    setUserPhotoUrl(String(auth.currentUser?.photoURL))
+  })
 
   return (
     <Container>
@@ -85,7 +96,7 @@ const Home: React.FC = () => {
             {!showSelectedChat ? (
               <>
                 <h1>ReactChat</h1>
-                <AvatarImage src="https://github.com/joaopaulo-ld.png" />
+                <AvatarImage src={userPhotoUrl} />
               </>
             ) : (
               <>
@@ -98,7 +109,7 @@ const Home: React.FC = () => {
         ) : (
           <>
             <h1><i>ReactChat</i></h1>
-            <AvatarImage src="https://github.com/joaopaulo-ld.png" />
+            <AvatarImage src={userPhotoUrl} />
           </>
         )}
       </header>

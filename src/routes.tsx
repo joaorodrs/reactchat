@@ -10,27 +10,22 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
 
-firebase.initializeApp({
-  apiKey: "AIzaSyAUky8NQpEYt4ebCTCAV02MlzfwI1xDfKM",
-  authDomain: "reactchat-br.firebaseapp.com",
-  databaseURL: "https://reactchat-br.firebaseio.com",
-  projectId: "reactchat-br",
-  storageBucket: "reactchat-br.appspot.com",
-  messagingSenderId: "1029898722836",
-  appId: "1:1029898722836:web:14a6fe44593a2dbae15101"
-})
+interface Props {
+  auth: firebase.auth.Auth,
+  firestore: firebase.firestore.Firestore
+}
 
-const auth = firebase.auth()
-const firestore = firebase.firestore()
-
-const Routes: React.FC = () => {
+const Routes: React.FC<Props> = ({ auth, firestore }) => {
   const [user] = useAuthState(auth)
 
   return (
     <BrowserRouter>
-      {user ? <Route path="/" component={() => <Home />} /> : <Route path="/" component={SignIn} />}
+      {user ? <Route path="/" component={() => (
+        <Home firestore={firestore} auth={auth} />
+      )} /> : <Route path="/" component={() => (
+        <SignIn firestore={firestore} auth={auth} />
+      )} />}
     </BrowserRouter>
   )
 }

@@ -15,7 +15,6 @@ interface Props {
 }
 
 const Chat: React.FC<Props> = ({ name, userId, photoUrl }) => {
-  const handleSendMessage = () => console.log('Pressed!')
 
   return (
     <Container>

@@ -1,7 +1,6 @@
 import React from 'react'
 
 import firebase from 'firebase/app'
-import 'firebase/auth'
 
 import {
   Container,
@@ -12,9 +11,12 @@ import {
   FacebookIcon
 } from './styles'
 
-const auth = firebase.auth()
+interface Props {
+  auth: firebase.auth.Auth,
+  firestore: firebase.firestore.Firestore
+}
 
-const SignIn: React.FC = () => {
+const SignIn: React.FC<Props> = ({ firestore, auth }) => {
   function handleSignInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider()
 
