@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Chat from '../../components/Chat'
 
 import firebase from 'firebase/app'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 import {
   Container,
@@ -14,11 +15,14 @@ import {
   BackIcon
 } from './styles'
 
-interface Conversations {
-  name: string,
-  userId: string,
-  photoUrl: string,
-  lastMessage: string
+interface Contact {
+  displayName: string,
+  email: string,
+  messages: Array<{
+    content: string,
+    time: { nanoseconds: number, seconds: number },
+    type: "send" | "recieve"
+  }>
 }
 
 interface Props {
@@ -29,44 +33,9 @@ interface Props {
 const windowWidth = window.innerWidth
 
 const Home: React.FC<Props> = ({ firestore, auth }) => {
-  const conversations: Conversations[] = [
-    {
-      name: 'João Paulo',
-      userId: 'joaopaulo-ld',
-      photoUrl: 'https://github.com/joaopaulo-ld.png',
-      lastMessage: 'Tô chegando aí hein!'
-    },
-    {
-      name: 'Marcio Camello',
-      userId: 'marciocamello',
-      photoUrl: 'https://github.com/marciocamello.png',
-      lastMessage: 'Ok certo!'
-    },
-    {
-      name: 'Diego Fernandes',
-      userId: 'diego3g',
-      photoUrl: 'https://github.com/diego3g.png',
-      lastMessage: 'Faaala Dev'
-    },
-    {
-      name: 'Guilherme Rodz',
-      userId: 'guilhermerodz',
-      photoUrl: 'https://github.com/guilhermerodz.png',
-      lastMessage: 'Tá blz'
-    },
-    {
-      name: 'Allan Melo',
-      userId: 'allanmelo',
-      photoUrl: 'https://github.com/allanmelo.png',
-      lastMessage: 'Oi?'
-    },
-    {
-      name: 'Julia Finassi',
-      userId: 'julia-finassi',
-      photoUrl: 'https://github.com/julia-finassi.png',
-      lastMessage: 'Lorem ipsulum dolor sia amet sonimblades crelvis bla bla'
-    },
-  ]
+  const contactsRef = firestore.collection('userContacts')
+    
+  const [contacts]: any = useCollectionData(contactsRef.orderBy('email'))
 
   const [showSelectedChat, setShowSelectedChat] = useState(false)
 
@@ -76,17 +45,16 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
   const [selectedChatUserId, setSelectedChatUserId] = useState('')
   const [selectedChatPhotoUrl, setSelectedChatPhotoUrl] = useState('')
 
-  const handleOpenChat = ({ name, userId, photoUrl, lastMessage }: Conversations) => {
-    setSelectedChatName(name)
-    setSelectedChatUserId(userId)
-    setSelectedChatPhotoUrl(photoUrl)
+  const handleOpenChat = ({ displayName, email }: Contact) => {
+    setSelectedChatName(displayName)
+    setSelectedChatUserId(email)
 
     setShowSelectedChat(true)
   }
 
   useEffect(() => {
     setUserPhotoUrl(String(auth.currentUser?.photoURL))
-  })
+  }, [])
 
   return (
     <Container>
@@ -119,12 +87,12 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
           <>
             {!showSelectedChat && (
               <div className="chats-wrapper">
-                {conversations.map((conversation) => (
+                {contacts?.map((conversation: Contact) => (
                   <ChatContainer onClick={() => handleOpenChat(conversation)}>
-                    <ChatAvatar src={conversation.photoUrl} />
+                    <ChatAvatar src={conversation.displayName} />
                     <div className="chat-informations-wrapper">
-                      <ChatName>{conversation.name}</ChatName>
-                      <ChatLastMessage>{conversation.lastMessage}</ChatLastMessage>
+                      <ChatName>{conversation.displayName}</ChatName>
+                      <ChatLastMessage>{conversation.messages[0].content}</ChatLastMessage>
                     </div>
                   </ChatContainer>
                 ))}
@@ -134,15 +102,15 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
         ) : (
           <>
             <div className="chats-wrapper">
-              {conversations.map(conversation => (
+              {contacts?.map((conversation: Contact) => (
                 <ChatContainer onClick={() => handleOpenChat(conversation)}>
-                  <ChatAvatar src={conversation.photoUrl} />
+                  <ChatAvatar src={conversation.displayName} />
                   <div className="chat-informations-wrapper">
-                    <ChatName>{conversation.name}</ChatName>
-                    <ChatLastMessage>{conversation.lastMessage}</ChatLastMessage>
+                    <ChatName>{conversation.displayName}</ChatName>
+                    <ChatLastMessage>{conversation.messages[0].content}</ChatLastMessage>
                   </div>
                 </ChatContainer>
-              ))}
+                ))}
             </div>
           </>
         )}
