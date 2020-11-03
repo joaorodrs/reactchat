@@ -11,7 +11,6 @@ import {
   MessageContainer,
   Message,
 } from './styles'
-import { textChangeRangeIsUnchanged } from 'typescript'
 
 interface Props {
   messages: Array<{
@@ -26,8 +25,6 @@ interface Props {
 const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
   const [message, setMessage] = useState<string>('')
   const [blankMessage, setBlankMessage] = useState(false)
-
-  const [loading, setLoading] = useState(false)
 
   const userEmail = auth.currentUser?.email
 
@@ -45,8 +42,6 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
     }
 
     const photoUrl = auth.currentUser?.photoURL
-
-    setLoading(true)
     setMessage('')
 
     await messagesRef.add({
@@ -56,7 +51,6 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
       senderPhoto: photoUrl
     })
 
-    setLoading(false)
     if (dummyRef === null) return
     // @ts-ignore
     dummyRef.current.scrollIntoView({ behavior: 'smooth' })

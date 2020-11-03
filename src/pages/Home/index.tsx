@@ -81,7 +81,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
                     <ChatAvatar />
                     <div className="chat-informations-wrapper">
                       <ChatName>General Chatting</ChatName>
-                      <ChatLastMessage>Open the chat!</ChatLastMessage>
+                      <ChatLastMessage>{messages && messages[0]?.text}</ChatLastMessage>
                     </div>
                   </ChatContainer>
               </div>
@@ -93,7 +93,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
               <ChatAvatar />
               <div className="chat-informations-wrapper">
                 <ChatName>General Group</ChatName>
-                <ChatLastMessage>Open the Chat!</ChatLastMessage>
+                <ChatLastMessage>{messages && messages[0]?.text}</ChatLastMessage>
               </div>
             </ChatContainer>
           </div>
