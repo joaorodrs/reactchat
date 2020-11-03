@@ -5,6 +5,8 @@ import Chat from '../../components/Chat'
 import firebase from 'firebase/app'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
+import reactChatLogo from '../../assets/reactchat-logo.png'
+
 import {
   Container,
   AvatarImage,
@@ -53,7 +55,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
           <>
             {!showSelectedChat ? (
               <>
-                <h1>ReactChat</h1>
+                <img src={reactChatLogo} alt="ReactChat"/>
                 <AvatarImage src={userPhotoUrl} />
               </>
             ) : (
@@ -66,7 +68,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
           </>
         ) : (
           <>
-            <h1><i>ReactChat</i></h1>
+            <img src={reactChatLogo} alt="ReactChat"/>
             <AvatarImage src={userPhotoUrl} />
           </>
         )}
