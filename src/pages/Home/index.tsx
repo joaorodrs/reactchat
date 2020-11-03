@@ -15,16 +15,6 @@ import {
   BackIcon
 } from './styles'
 
-interface Contact {
-  displayName: string,
-  email: string,
-  messages: Array<{
-    content: string,
-    time: { nanoseconds: number, seconds: number },
-    type: "send" | "recieve"
-  }>
-}
-
 interface Props {
   auth: firebase.auth.Auth,
   firestore: firebase.firestore.Firestore
@@ -42,17 +32,13 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
 
   const [userPhotoUrl, setUserPhotoUrl] = useState('')
 
-  const [selectedChatName, setSelectedChatName] = useState('cool')
-  const [selectedChatUserId, setSelectedChatUserId] = useState('')
-  const [selectedChatPhotoUrl, setSelectedChatPhotoUrl] = useState('')
-
   const handleOpenChat = () => {
     setShowSelectedChat(true)
   }
 
   useEffect(() => {
     setUserPhotoUrl(String(auth.currentUser?.photoURL))
-  }, [])
+  }, [auth.currentUser?.photoURL])
 
   return (
     <Container>
@@ -109,7 +95,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
 
         <div className="selected-chat-wrapper">
           {showSelectedChat && (
-            <Chat name="General Chatting" userId="general-chatting" photoUrl="https://github.com/joaopaulo-ld.png" />
+            <Chat messages={messages} />
           )}
         </div>
       </main>

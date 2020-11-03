@@ -5,21 +5,43 @@ import {
   ChatContainer,
   InputContainer,
   SendMessageButton,
-  SendMessageIcon
+  SendMessageIcon,
+  MessageContainer,
+  Message,
 } from './styles'
 
 interface Props {
-  name: string,
-  userId: string,
-  photoUrl: string,
+  messages: [any]
 }
 
-const Chat: React.FC<Props> = ({ name, userId, photoUrl }) => {
-
+const Chat: React.FC<Props> = ({ messages }) => {
   return (
     <Container>
       <ChatContainer>
-
+        <MessageContainer received>
+          <Message>
+            <img src="https://github.com/joaopaulo-ld.png" alt="user" />
+            <p>It wurks!</p>
+          </Message>
+        </MessageContainer>
+        <MessageContainer>
+          <Message>
+            <img src="https://github.com/joaopaulo-ld.png" />
+            <p>It wurks!</p>
+          </Message>
+        </MessageContainer>
+        <MessageContainer received>
+          <Message>
+            <img src="https://github.com/joaopaulo-ld.png" />
+            <p>It wurks!</p>
+          </Message>
+        </MessageContainer>
+        <MessageContainer>
+          <Message>
+            <img src="https://github.com/joaopaulo-ld.png" />
+            <p>It wurks!</p>
+          </Message>
+        </MessageContainer>
       </ChatContainer>
       <InputContainer>
         <input

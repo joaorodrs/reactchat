@@ -11,6 +11,9 @@ export const Container = styled.div`
 
 export const ChatContainer = styled.div`
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `
 
 export const InputContainer = styled.div`
@@ -59,4 +62,31 @@ export const SendMessageIcon = styled(FiSend)`
   width: 20px;
   height: 20px;
   color: white;
+`
+
+export const MessageContainer = styled.div<{ received?: boolean }>`
+  display: flex;
+  justify-content: ${props => props.received ? 'flex-start' : 'flex-end'};
+
+  img {
+    display: ${props => props.received ? 'unset' : 'none'};
+  }
+`
+
+export const Message = styled.div`
+  background: rgba(110,0,200,0.5);
+  padding: 0 10px;
+  border-radius: 5px;
+  height: 50px;
+  max-width: 275px;
+  margin: 10px 10px 10px;
+  display: flex;
+  align-items: center;
+
+  > img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 `
