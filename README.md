@@ -42,6 +42,7 @@ $ git clone https://github.com/joaopaulo-ld/simples-conta-internet-banking
 ## 👀 To implement
 - [ ] Do all the requirements
 - [ ] Responsive UI
+- [ ] Make a user able to have multiple contacts on his app, and message in realtime with other users
 - [ ] Make chat groups
 - [ ] Make message status with icons (like WhatsApp and Telegram)
 

@@ -25,6 +25,19 @@ export const Container = styled.div`
         margin-left: 8px;
       }
     }
+
+    .general-chatting-profile {
+      background: rgb(50,46,56);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      padding: 3px;
+      border: 1px solid white;
+
+      @media (max-width: 800px) {
+        margin-left: 10px;
+      }
+    }
   }
 
   > main {
@@ -85,6 +98,7 @@ export const ChatContainer = styled.div`
   cursor: pointer;
   transition: background 0.3s;
   border-radius: 10px;
+  margin: 10px 0 0 10px;
 
   > div.chat-informations-wrapper {
     margin-left: 15px;
@@ -95,7 +109,8 @@ export const ChatContainer = styled.div`
   }
 `
 
-export const ChatAvatar = styled.img`
+export const ChatAvatar = styled.div`
+  background: rgb(30,26,36);
   width: 55px;
   height: 55px;
   border-radius: 50%;

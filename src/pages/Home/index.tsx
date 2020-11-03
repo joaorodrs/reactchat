@@ -33,9 +33,10 @@ interface Props {
 const windowWidth = window.innerWidth
 
 const Home: React.FC<Props> = ({ firestore, auth }) => {
-  const contactsRef = firestore.collection('userContacts')
+  const messagesRef = firestore.collection('messages')
+  const query = messagesRef.orderBy('createdAt').limit(25)
     
-  const [contacts]: any = useCollectionData(contactsRef.orderBy('email'))
+  const [messages]: any = useCollectionData(query, { idField: 'id' })
 
   const [showSelectedChat, setShowSelectedChat] = useState(false)
 
@@ -45,10 +46,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
   const [selectedChatUserId, setSelectedChatUserId] = useState('')
   const [selectedChatPhotoUrl, setSelectedChatPhotoUrl] = useState('')
 
-  const handleOpenChat = ({ displayName, email }: Contact) => {
-    setSelectedChatName(displayName)
-    setSelectedChatUserId(email)
-
+  const handleOpenChat = () => {
     setShowSelectedChat(true)
   }
 
@@ -69,8 +67,8 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
             ) : (
               <>
                 <BackIcon onClick={() => setShowSelectedChat(false)} />
-                <AvatarImage src={selectedChatPhotoUrl} />
-                <h1>{selectedChatName}</h1>
+                <div className="general-chatting-profile" />
+                <h1>General Chatting</h1>
               </>
             )}
           </>
@@ -87,37 +85,31 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
           <>
             {!showSelectedChat && (
               <div className="chats-wrapper">
-                {contacts?.map((conversation: Contact) => (
-                  <ChatContainer onClick={() => handleOpenChat(conversation)}>
-                    <ChatAvatar src={conversation.displayName} />
+                  <ChatContainer onClick={handleOpenChat}>
+                    <ChatAvatar />
                     <div className="chat-informations-wrapper">
-                      <ChatName>{conversation.displayName}</ChatName>
-                      <ChatLastMessage>{conversation.messages[0].content}</ChatLastMessage>
+                      <ChatName>General Chatting</ChatName>
+                      <ChatLastMessage>Open the chat!</ChatLastMessage>
                     </div>
                   </ChatContainer>
-                ))}
               </div>
             )}
           </>
         ) : (
-          <>
-            <div className="chats-wrapper">
-              {contacts?.map((conversation: Contact) => (
-                <ChatContainer onClick={() => handleOpenChat(conversation)}>
-                  <ChatAvatar src={conversation.displayName} />
-                  <div className="chat-informations-wrapper">
-                    <ChatName>{conversation.displayName}</ChatName>
-                    <ChatLastMessage>{conversation.messages[0].content}</ChatLastMessage>
-                  </div>
-                </ChatContainer>
-                ))}
-            </div>
-          </>
+          <div className="chats-wrapper">
+            <ChatContainer onClick={handleOpenChat}>
+              <ChatAvatar />
+              <div className="chat-informations-wrapper">
+                <ChatName>General Group</ChatName>
+                <ChatLastMessage>Open the Chat!</ChatLastMessage>
+              </div>
+            </ChatContainer>
+          </div>
         )}
 
         <div className="selected-chat-wrapper">
           {showSelectedChat && (
-            <Chat name={selectedChatName} userId={selectedChatUserId} photoUrl={selectedChatPhotoUrl} />
+            <Chat name="General Chatting" userId="general-chatting" photoUrl="https://github.com/joaopaulo-ld.png" />
           )}
         </div>
       </main>
