@@ -20,13 +20,19 @@ interface Props {
   firestore: firebase.firestore.Firestore
 }
 
+interface Message {
+  text: string,
+  sender: string,
+  senderPhoto: string,
+}
+
 const windowWidth = window.innerWidth
 
 const Home: React.FC<Props> = ({ firestore, auth }) => {
   const messagesRef = firestore.collection('messages')
   const query = messagesRef.orderBy('createdAt').limit(25)
     
-  const [messages]: any = useCollectionData(query, { idField: 'id' })
+  const [messages]: [Message[] | undefined, boolean, Error | undefined] = useCollectionData(query, { idField: 'id' })
 
   const [showSelectedChat, setShowSelectedChat] = useState(false)
 
@@ -95,7 +101,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
 
         <div className="selected-chat-wrapper">
           {showSelectedChat && (
-            <Chat messages={messages} />
+            <Chat messages={messages} auth={auth} messagesRef={messagesRef} />
           )}
         </div>
       </main>

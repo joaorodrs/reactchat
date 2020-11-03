@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { FormEvent, useRef, useState } from 'react'
+
+import firebase from 'firebase/app'
 
 import {
   Container,
@@ -9,45 +11,73 @@ import {
   MessageContainer,
   Message,
 } from './styles'
+import { textChangeRangeIsUnchanged } from 'typescript'
 
 interface Props {
-  messages: [any]
+  messages: Array<{
+    text: string,
+    sender: string,
+    senderPhoto: string,
+  }> | undefined,
+  auth: firebase.auth.Auth,
+  messagesRef: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>
 }
 
-const Chat: React.FC<Props> = ({ messages }) => {
+const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
+  const [message, setMessage] = useState<string>('')
+  const [blankMessage, setBlankMessage] = useState(false)
+
+  const [loading, setLoading] = useState(false)
+
+  const userEmail = auth.currentUser?.email
+
+  const dummyRef = useRef<HTMLDivElement>(null)
+
+  async function sendMessage(event: FormEvent) {
+    event.preventDefault()
+
+    if (message?.length < 1) {
+      return setBlankMessage(true)
+    }
+
+    const photoUrl = auth.currentUser?.photoURL
+
+    setLoading(true)
+
+    await messagesRef.add({
+      text: message,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      sender: userEmail,
+      senderPhoto: photoUrl
+    })
+
+    setLoading(false)
+    setMessage('')
+    if (dummyRef === null) return
+    // @ts-ignore
+    dummyRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <Container>
       <ChatContainer>
-        <MessageContainer received>
-          <Message>
-            <img src="https://github.com/joaopaulo-ld.png" alt="user" />
-            <p>It wurks!</p>
-          </Message>
-        </MessageContainer>
-        <MessageContainer>
-          <Message>
-            <img src="https://github.com/joaopaulo-ld.png" />
-            <p>It wurks!</p>
-          </Message>
-        </MessageContainer>
-        <MessageContainer received>
-          <Message>
-            <img src="https://github.com/joaopaulo-ld.png" />
-            <p>It wurks!</p>
-          </Message>
-        </MessageContainer>
-        <MessageContainer>
-          <Message>
-            <img src="https://github.com/joaopaulo-ld.png" />
-            <p>It wurks!</p>
-          </Message>
-        </MessageContainer>
+        {messages?.map(message => (
+          <MessageContainer received={message.sender !== userEmail}>
+            <Message>
+              <img src={message.senderPhoto} alt="user" />
+              <p>{message.text}</p>
+            </Message>
+          </MessageContainer>
+        ))}
+        <div ref={dummyRef}></div>
       </ChatContainer>
-      <InputContainer>
+      <InputContainer onSubmit={sendMessage}>
         <input
           placeholder="Digite uma mensagem"
+          value={message}
+          onChange={e => setMessage(e.target.value)}
         />
-        <SendMessageButton>
+        <SendMessageButton type="submit">
           <SendMessageIcon />
         </SendMessageButton>
       </InputContainer>

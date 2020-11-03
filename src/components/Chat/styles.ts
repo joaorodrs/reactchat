@@ -16,7 +16,7 @@ export const ChatContainer = styled.div`
   justify-content: flex-end;
 `
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   background: rgb(60,56,66);
   width: 95%;
   height: 50px;
@@ -46,7 +46,7 @@ export const InputContainer = styled.div`
   }
 `
 
-export const SendMessageButton = styled.button`
+export const SendMessageButton = styled.a`
   width: 55px;
   height: 100%;
   border-left: 1px solid rgba(255,255,255,0.2);
