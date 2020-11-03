@@ -37,12 +37,17 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
     event.preventDefault()
 
     if (message?.length < 1) {
-      return setBlankMessage(true)
+      setBlankMessage(true)
+
+      const timer = setTimeout(() => setBlankMessage(false), 100)
+
+      return () => clearTimeout(timer)
     }
 
     const photoUrl = auth.currentUser?.photoURL
 
     setLoading(true)
+    setMessage('')
 
     await messagesRef.add({
       text: message,
@@ -52,7 +57,6 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
     })
 
     setLoading(false)
-    setMessage('')
     if (dummyRef === null) return
     // @ts-ignore
     dummyRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -71,7 +75,7 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
         ))}
         <div ref={dummyRef}></div>
       </ChatContainer>
-      <InputContainer onSubmit={sendMessage}>
+      <InputContainer onSubmit={sendMessage} blankMessage={blankMessage}>
         <input
           placeholder="Digite uma mensagem"
           value={message}

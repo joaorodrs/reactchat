@@ -16,16 +16,18 @@ export const ChatContainer = styled.div`
   justify-content: flex-end;
 `
 
-export const InputContainer = styled.form`
+export const InputContainer = styled.form<{ blankMessage: boolean }>`
   background: rgb(60,56,66);
   width: 95%;
   height: 50px;
   margin: 10px;
+  margin-bottom: ${props => props.blankMessage ? '30px' : '10px'};
   align-self: center;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: 0.2s;
 
   > input {
     height: 100%;
@@ -46,7 +48,7 @@ export const InputContainer = styled.form`
   }
 `
 
-export const SendMessageButton = styled.a`
+export const SendMessageButton = styled.button`
   width: 55px;
   height: 100%;
   border-left: 1px solid rgba(255,255,255,0.2);
