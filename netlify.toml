@@ -1,0 +1,4 @@
+[build]
+  base = "docs/"
+  command = "node deploy-script.js"
+  ignore = "git diff --quiet master src/assets"
