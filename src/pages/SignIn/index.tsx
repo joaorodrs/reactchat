@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import firebase from 'firebase/app'
+
+import Loader from 'react-loader-spinner'
+
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 import {
   Container,
@@ -11,12 +15,16 @@ import {
   FacebookIcon
 } from './styles'
 
+
 interface Props {
   auth: firebase.auth.Auth,
-  firestore: firebase.firestore.Firestore
 }
 
-const SignIn: React.FC<Props> = ({ firestore, auth }) => {
+const SignIn: React.FC<Props> = ({ auth }) => {
+  const [loading, setLoading] = useState(true)
+  const [user] = useAuthState(auth)
+  console.log(user)
+
   function handleSignInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider()
 
@@ -29,19 +37,35 @@ const SignIn: React.FC<Props> = ({ firestore, auth }) => {
     auth.signInWithPopup(provider)
   }
 
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 3000)
+  }, [])
+
   return (
     <Container>
-      <h1>Reactchat</h1>
-      <ButtonsContainer>
-        <GoogleButton onClick={handleSignInWithGoogle}>
-          <p>Entrar com</p>
-          <GoogleIcon />
-        </GoogleButton>
-        <FacebookButton onClick={handleSignInWithFacebook}>
-          <p>Entrar com</p>
-          <FacebookIcon />
-        </FacebookButton>
-      </ButtonsContainer>
+      {loading ? (
+        <Loader
+          type="ThreeDots"
+          color="#00BFFF"
+          height={80}
+          width={80}
+          timeout={3000}
+        />
+      ) : (
+        <>
+          <h1>Reactchat</h1>
+          <ButtonsContainer>
+            <GoogleButton onClick={handleSignInWithGoogle}>
+              <p>Entrar com</p>
+              <GoogleIcon />
+            </GoogleButton>
+            <FacebookButton onClick={handleSignInWithFacebook}>
+              <p>Entrar com</p>
+              <FacebookIcon />
+            </FacebookButton>
+          </ButtonsContainer>
+        </>
+      )}
     </Container>
   )
 }

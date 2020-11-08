@@ -6,8 +6,6 @@ import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 
 import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 
@@ -24,7 +22,7 @@ const Routes: React.FC<Props> = ({ auth, firestore }) => {
       {user ? <Route path="/" component={() => (
         <Home firestore={firestore} auth={auth} />
       )} /> : <Route path="/" component={() => (
-        <SignIn firestore={firestore} auth={auth} />
+        <SignIn auth={auth} />
       )} />}
     </BrowserRouter>
   )
