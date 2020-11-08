@@ -46,10 +46,9 @@ const SignIn: React.FC<Props> = ({ auth }) => {
       {loading ? (
         <Loader
           type="ThreeDots"
-          color="#00BFFF"
+          color="#803790"
           height={80}
           width={80}
-          timeout={3000}
         />
       ) : (
         <>

@@ -7,7 +7,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  user-select: text;
 `
 
 export const ChatContainer = styled.div`
@@ -29,7 +28,6 @@ export const InputContainer = styled.form<{ blankMessage: boolean }>`
   align-items: center;
   justify-content: space-between;
   transition: 0.2s;
-  user-select: none;
 
   > input {
     height: 100%;
@@ -71,10 +69,10 @@ export const SendMessageIcon = styled(FiSend)`
 export const MessageContainer = styled.div<{ received?: boolean }>`
   display: flex;
   justify-content: ${props => props.received ? 'flex-start' : 'flex-end'};
-
+  
   @media (min-width: 800px) {
-    margin-left: ${props => props.received ? '15px' : '0'};
-    margin-right: ${props => !props.received ? '15px' : '0'};
+    width: 95%;
+    align-self: center;
   }
 
   img {
@@ -83,7 +81,7 @@ export const MessageContainer = styled.div<{ received?: boolean }>`
 `
 
 export const Message = styled.div`
-  background: rgba(110,0,200,0.5);
+  background: #642764;
   padding: 0 10px;
   border-radius: 5px;
   height: 50px;
@@ -94,14 +92,11 @@ export const Message = styled.div`
 
   > p {
     line-height: 50px;
+    user-select: text;
 
     ::selection {
-      background: rgba(255,0,255,0.5);
+      background: rgba(255,255,255,0.2);
     }
-  }
-
-  > i {
-    user-select: none;
   }
 
   > img {
