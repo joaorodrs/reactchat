@@ -14,7 +14,8 @@ import {
   ChatAvatar,
   ChatName,
   ChatLastMessage,
-  BackIcon
+  BackIcon,
+  LogoutIcon
 } from './styles'
 
 interface Props {
@@ -44,6 +45,10 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
     setShowSelectedChat(true)
   }
 
+  function logOut() {
+    auth.signOut()
+  }
+
   useEffect(() => {
     setUserPhotoUrl(String(auth.currentUser?.photoURL))
   }, [auth.currentUser?.photoURL])
@@ -57,6 +62,9 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
               <>
                 <img src={reactChatLogo} alt="ReactChat"/>
                 <AvatarImage src={userPhotoUrl} />
+                <div className="logout-wrapper" onClick={logOut}>
+                  <LogoutIcon />
+                </div>
               </>
             ) : (
               <>
@@ -70,6 +78,9 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
           <>
             <img src={reactChatLogo} alt="ReactChat"/>
             <AvatarImage src={userPhotoUrl} />
+            <div className="logout-wrapper" onClick={logOut}>
+              <LogoutIcon />
+            </div>
           </>
         )}
       </header>
@@ -83,7 +94,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
                     <ChatAvatar />
                     <div className="chat-informations-wrapper">
                       <ChatName>General Chatting</ChatName>
-                      <ChatLastMessage>{messages && messages[0]?.text}</ChatLastMessage>
+                      <ChatLastMessage>{messages && messages[messages.length -1]?.text}</ChatLastMessage>
                     </div>
                   </ChatContainer>
               </div>
@@ -95,7 +106,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
               <ChatAvatar />
               <div className="chat-informations-wrapper">
                 <ChatName>General Group</ChatName>
-                <ChatLastMessage>{messages && messages[0]?.text}</ChatLastMessage>
+                <ChatLastMessage>{messages && messages[messages.length -1]?.text}</ChatLastMessage>
               </div>
             </ChatContainer>
           </div>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FiArrowLeft } from 'react-icons/fi'
+import { FiArrowLeft, FiPower } from 'react-icons/fi'
 
 export const Container = styled.div`
   height: 100vh;
@@ -21,6 +21,10 @@ export const Container = styled.div`
       height: 40px;
     }
 
+    > h1 {
+      font-size: 25px;
+    }
+
     @media (max-width: 800px) {
       > h1 {
         margin-left: 8px;
@@ -37,6 +41,30 @@ export const Container = styled.div`
 
       @media (max-width: 800px) {
         margin-left: 10px;
+      }
+    }
+
+    .logout-wrapper {
+      background: rgba(0,0,0,0.5);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      position: absolute;
+      right: 20px;
+      opacity: 0;
+      transition: 0.2s;
+      cursor: pointer;
+      z-index: 2;
+
+      :hover {
+        opacity: 1;
+
+        > svg {
+          opacity: 1
+        }
       }
     }
   }
@@ -126,4 +154,11 @@ export const ChatLastMessage = styled.p`
 export const BackIcon = styled(FiArrowLeft)`
   width: 30px;
   height: 30px;
+`
+
+export const LogoutIcon = styled(FiPower)`
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  transition: 0.2s;
 `

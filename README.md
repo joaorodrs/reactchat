@@ -1,3 +1,6 @@
+<p align='center'>
+  <img src="./src/assets/reactchat-logo.png" />
+</p>
 <i><h1 align='center'>ReactChat</h1></i>
 <p align='center'>A ReactJS real-time chatting application with Firebase and Styled Components</p>
 
