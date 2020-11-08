@@ -7,6 +7,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  user-select: text;
 `
 
 export const ChatContainer = styled.div`
@@ -28,6 +29,7 @@ export const InputContainer = styled.form<{ blankMessage: boolean }>`
   align-items: center;
   justify-content: space-between;
   transition: 0.2s;
+  user-select: none;
 
   > input {
     height: 100%;
@@ -70,6 +72,11 @@ export const MessageContainer = styled.div<{ received?: boolean }>`
   display: flex;
   justify-content: ${props => props.received ? 'flex-start' : 'flex-end'};
 
+  @media (min-width: 800px) {
+    margin-left: ${props => props.received ? '15px' : '0'};
+    margin-right: ${props => !props.received ? '15px' : '0'};
+  }
+
   img {
     display: ${props => props.received ? 'unset' : 'none'};
   }
@@ -84,6 +91,18 @@ export const Message = styled.div`
   margin: 10px 10px 10px;
   display: flex;
   align-items: center;
+
+  > p {
+    line-height: 50px;
+
+    ::selection {
+      background: rgba(255,0,255,0.5);
+    }
+  }
+
+  > i {
+    user-select: none;
+  }
 
   > img {
     width: 30px;

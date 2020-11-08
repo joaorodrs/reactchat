@@ -3,6 +3,7 @@ import { FiArrowLeft, FiPower } from 'react-icons/fi'
 
 export const Container = styled.div`
   height: 100vh;
+  user-select: none;
 
   > header {
     background: rgb(30,26,36);

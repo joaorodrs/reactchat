@@ -56,6 +56,12 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
     dummyRef.current.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const censures = [
+    "legal",
+    "sim",
+    "não"
+  ]
+
   return (
     <Container>
       <ChatContainer>
@@ -63,7 +69,7 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
           <MessageContainer received={message.sender !== userEmail}>
             <Message>
               <img src={message.senderPhoto} alt="user" />
-              <p>{message.text}</p>
+              {censures.find(element => element === message.text.toLowerCase()) ? <i>Mensagem censurada</i> : <p>{message.text}</p>}
             </Message>
           </MessageContainer>
         ))}

@@ -105,7 +105,7 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
             <ChatContainer onClick={handleOpenChat}>
               <ChatAvatar />
               <div className="chat-informations-wrapper">
-                <ChatName>General Group</ChatName>
+                <ChatName>General Chatting</ChatName>
                 <ChatLastMessage>{messages && messages[messages.length -1]?.text}</ChatLastMessage>
               </div>
             </ChatContainer>
