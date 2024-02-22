@@ -44,23 +44,28 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
     const photoUrl = auth.currentUser?.photoURL
     setMessage('')
 
-    await messagesRef.add({
-      text: message,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      sender: userEmail,
-      senderPhoto: photoUrl
-    })
+    try {
+      const data = {
+        text: message,
+        createdAt: new Date(),
+        sender: userEmail,
+        senderPhoto: photoUrl
+      }
 
-    if (dummyRef === null) return
-    // @ts-ignore
-    dummyRef.current.scrollIntoView({ behavior: 'smooth' })
+      console.log({ data })
+
+      await messagesRef.add(data)
+
+      if (dummyRef === null) return
+      // @ts-ignore
+      dummyRef.current.scrollIntoView({ behavior: 'smooth' })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  const censures = [
-    "legal",
-    "sim",
-    "não"
-  ]
+  const censures = process.env.REACT_APP_SENSORED_WORDS?.split(',')
+  console.log({ censures })
 
   return (
     <Container>
@@ -69,7 +74,7 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
           <MessageContainer received={message.sender !== userEmail}>
             <Message>
               <img src={message.senderPhoto} alt="user" />
-              {censures.find(element => element === message.text.toLowerCase()) ? <i>Mensagem censurada</i> : <p>{message.text}</p>}
+              {censures?.find(element => element === message.text.toLowerCase()) ? <i>Mensagem censurada</i> : <p>{message.text}</p>}
             </Message>
           </MessageContainer>
         ))}

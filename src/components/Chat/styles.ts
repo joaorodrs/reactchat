@@ -30,7 +30,7 @@ export const InputContainer = styled.form<{ blankMessage: boolean }>`
   transition: 0.2s;
 
   > input {
-    height: 100%;
+    height: 50px;
     width: 100%;
     border-radius: 8px 0 0 8px;
     font-size: 20px;
@@ -82,16 +82,15 @@ export const MessageContainer = styled.div<{ received?: boolean }>`
 
 export const Message = styled.div`
   background: #642764;
-  padding: 0 10px;
+  padding: 10px;
   border-radius: 5px;
-  height: 50px;
+  min-height: 50px;
   max-width: 275px;
   margin: 10px 10px 10px;
   display: flex;
   align-items: center;
 
   > p {
-    line-height: 50px;
     user-select: text;
 
     ::selection {
