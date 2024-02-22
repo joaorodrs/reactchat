@@ -11,7 +11,6 @@ import {
   Container,
   AvatarImage,
   ChatContainer,
-  ChatAvatar,
   ChatName,
   ChatLastMessage,
   BackIcon,
@@ -33,9 +32,9 @@ const windowWidth = window.innerWidth
 
 const Home: React.FC<Props> = ({ firestore, auth }) => {
   const messagesRef = firestore.collection('messages')
-  const query = messagesRef.orderBy('createdAt').limit(25)
-    
-  const [messages]: [Message[] | undefined, boolean, Error | undefined] = useCollectionData(query, { idField: 'id' })
+  const query = messagesRef.orderBy('createdAt')
+
+  const [messages] = useCollectionData<Message>(query, { idField: 'id' })
 
   const [showSelectedChat, setShowSelectedChat] = useState(false)
 
@@ -60,57 +59,42 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
           <>
             {!showSelectedChat ? (
               <>
-                <img src={reactChatLogo} alt="ReactChat"/>
+                <img src={reactChatLogo} alt="ReactChat" />
                 <AvatarImage src={userPhotoUrl} />
                 <div className="logout-wrapper" onClick={logOut}>
                   <LogoutIcon />
                 </div>
               </>
             ) : (
-              <>
-                <BackIcon onClick={() => setShowSelectedChat(false)} />
-                <div className="general-chatting-profile" />
-                <h1>General Chatting</h1>
-              </>
-            )}
+                <>
+                  <BackIcon onClick={() => setShowSelectedChat(false)} />
+                  <div className="general-chatting-profile" />
+                  <h1>General Chatting</h1>
+                </>
+              )}
           </>
         ) : (
-          <>
-            <img src={reactChatLogo} alt="ReactChat"/>
-            <AvatarImage src={userPhotoUrl} />
-            <div className="logout-wrapper" onClick={logOut}>
-              <LogoutIcon />
-            </div>
-          </>
-        )}
+            <>
+              <img src={reactChatLogo} alt="ReactChat" />
+              <AvatarImage src={userPhotoUrl} />
+              <div className="logout-wrapper" onClick={logOut}>
+                <LogoutIcon />
+              </div>
+            </>
+          )}
       </header>
 
       <main>
-        {windowWidth < 800 ? (
-          <>
-            {!showSelectedChat && (
-              <div className="chats-wrapper">
-                  <ChatContainer onClick={handleOpenChat}>
-                    <ChatAvatar />
-                    <div className="chat-informations-wrapper">
-                      <ChatName>General Chatting</ChatName>
-                      <ChatLastMessage>{messages && messages[messages.length -1]?.text}</ChatLastMessage>
-                    </div>
-                  </ChatContainer>
-              </div>
-            )}
-          </>
-        ) : (
+        {windowWidth > 800 || !showSelectedChat ? (
           <div className="chats-wrapper">
             <ChatContainer onClick={handleOpenChat}>
-              <ChatAvatar />
               <div className="chat-informations-wrapper">
                 <ChatName>General Chatting</ChatName>
-                <ChatLastMessage>{messages && messages[messages.length -1]?.text}</ChatLastMessage>
+                <ChatLastMessage>{messages && messages[messages.length - 1]?.text}</ChatLastMessage>
               </div>
             </ChatContainer>
           </div>
-        )}
+        ) : null}
 
         <div className="selected-chat-wrapper">
           {showSelectedChat && (

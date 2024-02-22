@@ -139,17 +139,13 @@ export const ChatContainer = styled.div`
   }
 `
 
-export const ChatAvatar = styled.div`
-  background: rgb(30,26,36);
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-`
-
 export const ChatName = styled.h3``
 
 export const ChatLastMessage = styled.p`
-  max-lines: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 `
 
 export const BackIcon = styled(FiArrowLeft)`
