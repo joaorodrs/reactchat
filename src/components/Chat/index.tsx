@@ -65,7 +65,7 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
   }
 
   const censures = process.env.REACT_APP_SENSORED_WORDS?.split(',')
-  console.log({ censures })
+  console.log({ messages })
 
   return (
     <Container>
@@ -81,7 +81,7 @@ const Chat: React.FC<Props> = ({ messages, auth, messagesRef }) => {
         <div ref={dummyRef}></div>
       </ChatContainer>
       <InputContainer onSubmit={sendMessage} blankMessage={blankMessage}>
-        <input
+        <textarea
           placeholder="Digite uma mensagem"
           value={message}
           onChange={e => setMessage(e.target.value)}

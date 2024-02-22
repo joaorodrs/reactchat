@@ -29,11 +29,16 @@ export const InputContainer = styled.form<{ blankMessage: boolean }>`
   justify-content: space-between;
   transition: 0.2s;
 
-  > input {
+  > textarea {
     height: 50px;
     width: 100%;
+    resize: none;
+    background-color: transparent;
+    border: none;
     border-radius: 8px 0 0 8px;
     font-size: 20px;
+    padding: 0;
+    padding-top: 15px;
     padding-left: 15px;
     color: white;
     transition: 0.2s;
@@ -45,6 +50,10 @@ export const InputContainer = styled.form<{ blankMessage: boolean }>`
     :focus {
       background: rgba(255,255,255,0.05);
     }
+  }
+
+  textarea::-webkit-scrollbar {
+    display: none;
   }
 `
 
@@ -85,13 +94,14 @@ export const Message = styled.div`
   padding: 10px;
   border-radius: 5px;
   min-height: 50px;
-  max-width: 275px;
+  max-width: 300px;
   margin: 10px 10px 10px;
   display: flex;
   align-items: center;
 
   > p {
     user-select: text;
+    word-break: break-word;
 
     ::selection {
       background: rgba(255,255,255,0.2);
@@ -99,8 +109,10 @@ export const Message = styled.div`
   }
 
   > img {
-    width: 30px;
-    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
     border-radius: 50%;
     margin-right: 10px;
   }
