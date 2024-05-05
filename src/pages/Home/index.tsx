@@ -14,7 +14,8 @@ import {
   ChatName,
   ChatLastMessage,
   BackIcon,
-  LogoutIcon
+  LogoutIcon,
+  GithubIcon
 } from './styles'
 
 interface Props {
@@ -92,7 +93,17 @@ const Home: React.FC<Props> = ({ firestore, auth }) => {
                 <ChatName>General Chatting</ChatName>
                 <ChatLastMessage>{messages && messages[messages.length - 1]?.text}</ChatLastMessage>
               </div>
+
             </ChatContainer>
+
+            <a
+              className="github"
+              href="https://github.com/joaorodrs/reactchat"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <GithubIcon />
+            </a>
           </div>
         ) : null}
 

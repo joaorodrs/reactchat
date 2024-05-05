@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { FiArrowLeft, FiPower } from 'react-icons/fi'
+import { IoLogoGithub } from 'react-icons/io'
 
 export const Container = styled.div`
   height: 100vh;
@@ -107,6 +108,29 @@ export const Container = styled.div`
       }
     }
   }
+
+  main {
+    .chats-wrapper {
+      a.github {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        transition: all 0.2s;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 5px;
+        color: white;
+
+        :hover {
+          background-color: #FFFFFF20;
+        }
+      }
+    }
+  }
 `
 
 export const AvatarImage = styled.img`
@@ -158,4 +182,9 @@ export const LogoutIcon = styled(FiPower)`
   height: 30px;
   opacity: 0;
   transition: 0.2s;
+`
+
+export const GithubIcon = styled(IoLogoGithub)`
+  width: 25px;
+  height: 25px;
 `

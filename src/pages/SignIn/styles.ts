@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { IoLogoFacebook, IoLogoGoogle } from 'react-icons/io'
+import { IoLogoFacebook, IoLogoGoogle, IoLogoGithub } from 'react-icons/io'
 
 export const Container = styled.div`
   display: flex;
@@ -60,4 +60,28 @@ export const FacebookButton = styled.div`
 
 export const FacebookIcon = styled(IoLogoFacebook)`
   ${iconCss}
+`
+
+export const GithubButton = styled.a`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  transition: all 0.2s;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+
+  :hover {
+    background-color: #FFFFFF30;
+  }
+`
+
+export const GithubIcon = styled(IoLogoGithub)`
+  width: 25px;
+  height: 25px;
 `

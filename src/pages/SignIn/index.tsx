@@ -12,7 +12,9 @@ import {
   GoogleButton,
   GoogleIcon,
   FacebookButton,
-  FacebookIcon
+  FacebookIcon,
+  GithubButton,
+  GithubIcon
 } from './styles'
 
 
@@ -30,7 +32,7 @@ const SignIn: React.FC<Props> = ({ auth }) => {
 
     auth.signInWithPopup(provider)
   }
-  
+
   function handleSignInWithFacebook() {
     const provider = new firebase.auth.FacebookAuthProvider()
 
@@ -43,6 +45,10 @@ const SignIn: React.FC<Props> = ({ auth }) => {
 
   return (
     <Container>
+      <GithubButton href="https://github.com/joaorodrs/reactchat" target="_blank">
+        <GithubIcon />
+      </GithubButton>
+
       {loading ? (
         <Loader
           type="ThreeDots"
@@ -51,20 +57,20 @@ const SignIn: React.FC<Props> = ({ auth }) => {
           width={80}
         />
       ) : (
-        <>
-          <h1>Reactchat</h1>
-          <ButtonsContainer>
-            <GoogleButton onClick={handleSignInWithGoogle}>
-              <p>Entrar com</p>
-              <GoogleIcon />
-            </GoogleButton>
-            <FacebookButton onClick={handleSignInWithFacebook}>
-              <p>Entrar com</p>
-              <FacebookIcon />
-            </FacebookButton>
-          </ButtonsContainer>
-        </>
-      )}
+          <>
+            <h1>Reactchat</h1>
+            <ButtonsContainer>
+              <GoogleButton onClick={handleSignInWithGoogle}>
+                <p>Entrar com</p>
+                <GoogleIcon />
+              </GoogleButton>
+              <FacebookButton onClick={handleSignInWithFacebook}>
+                <p>Entrar com</p>
+                <FacebookIcon />
+              </FacebookButton>
+            </ButtonsContainer>
+          </>
+        )}
     </Container>
   )
 }
